@@ -1,4 +1,4 @@
-﻿@page "/starship-9"
+@page "/starship-9"
 @inject ILogger<Starship9> Logger
 
 <h1>Starfleet Starship Database</h1>
@@ -45,7 +45,7 @@
     private CustomValidation? customValidation;
 
     [SupplyParameterFromForm]
-    public Starship? Model { get; set; }
+    private Starship? Model { get; set; }
 
     protected override void OnInitialized() =>
         Model ??= new() { ProductionDate = DateTime.UtcNow };
@@ -60,8 +60,8 @@
                 string.IsNullOrEmpty(Model.Description))
         {
             errors.Add(nameof(Model.Description),
-                new() { "For a 'Defense' ship classification, " +
-                "'Description' is required." });
+                [ "For a 'Defense' ship classification, " +
+                "'Description' is required." ]);
         }
 
         if (errors.Any())

@@ -1,4 +1,4 @@
-﻿@page "/starship-5"
+@page "/starship-5"
 @using System.ComponentModel.DataAnnotations
 @inject ILogger<Starship5> Logger
 
@@ -40,10 +40,7 @@
         editContext = new(Model);
     }
 
-    private void Submit()
-    {
-        Logger.LogInformation("Submit called: Processing the form");
-    }
+    private void Submit() => Logger.LogInformation("Submit: Processing form");
 
     private class Starship
     {
@@ -51,7 +48,7 @@
         [MinLength(2, ErrorMessage = "Select at least two classifications.")]
         [MaxLength(3, ErrorMessage = "Select no more than three classifications.")]
         public Classification[]? SelectedClassification { get; set; } =
-            new[] { Classification.None };
+            [ Classification.None ];
     }
 
     private enum Classification { None, Exploration, Diplomacy, Defense, Research }
