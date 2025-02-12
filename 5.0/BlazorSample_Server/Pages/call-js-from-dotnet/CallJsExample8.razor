@@ -28,18 +28,30 @@
 
     private async Task ShowAsync(double latitude, double longitude)
         => await mapModule.InvokeVoidAsync("setMapCenter", mapInstance, latitude,
-            longitude).AsTask();
+            longitude);
 
     async ValueTask IAsyncDisposable.DisposeAsync()
     {
         if (mapInstance is not null)
         {
-            await mapInstance.DisposeAsync();
+            try
+            {
+                await mapInstance.DisposeAsync();
+            }
+            catch
+            {
+            }
         }
 
         if (mapModule is not null)
         {
-            await mapModule.DisposeAsync();
+            try
+            {
+                await mapModule.DisposeAsync();
+            }
+            catch
+            {
+            }
         }
     }
 }

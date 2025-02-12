@@ -22,12 +22,9 @@
 
     private bool expanded;
 
-    protected override void OnParametersSet()
-    {
-        expanded = Expanded;
-    }
+    protected override void OnParametersSet() => expanded = Expanded;
 
-    private async void Toggle()
+    private async Task Toggle()
     {
         expanded = !expanded;
         await ExpandedChanged.InvokeAsync(expanded);
