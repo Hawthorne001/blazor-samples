@@ -31,7 +31,7 @@
         if (mapModule is not null && mapInstance is not null)
         {
             await mapModule.InvokeVoidAsync("setMapCenter", mapInstance, 
-                latitude, longitude).AsTask();
+                latitude, longitude);
         }
     }
 
@@ -39,12 +39,24 @@
     {
         if (mapInstance is not null)
         {
-            await mapInstance.DisposeAsync();
+            try
+            {
+                await mapInstance.DisposeAsync();
+            }
+            catch (JSDisconnectedException)
+            {
+            }
         }
 
         if (mapModule is not null)
         {
-            await mapModule.DisposeAsync();
+            try
+            {
+                await mapModule.DisposeAsync();
+            }
+            catch (JSDisconnectedException)
+            {
+            }
         }
     }
 }
